@@ -1,0 +1,186 @@
+Development History for Project FlowerPI (see: https://github.com/astaubert/flowerpi)
+=====================================================================================
+
+24.09.15 [air]		Created first python program!!!
+
+		Used the following resource in order to do my first experiments from python to Rails
+				
+		http://docs.python-requests.org/en/latest/index.html
+				
+04.10.15 [air]		First version of flowerpi.py is ready!!!! Works great :-))
+
+		Function: 
+				
+		- will query for a flower based on TAG number
+		- if flower does not exist, it will create a DUMMY flower for the new tag
+				
+	
+20.10.15 [pi]		Created GIT public repository (see github.com)
+
+		echo "# flowerpi" >> README.md
+		git init
+		git add README.md
+		git commit -m "first commit"
+		git remote add origin https://github.com/astaubert/flowerpi.git
+		git push -u origin master
+
+		username: astaubert
+		passwort: gi______5
+		
+23.10.15 [air]		Cloned repository also on MacBook Air
+
+		Andreass-MBAir:PythonDev admin$ git clone https://github.com/astaubert/flowerpi
+		Cloning into 'flowerpi'...
+		remote: Counting objects: 7, done.
+		remote: Compressing objects: 100% (5/5), done.
+		remote: Total 7 (delta 0), reused 7 (delta 0), pack-reused 0
+		Unpacking objects: 100% (7/7), done.
+		Checking connectivity... done.
+		Andreass-MBAir:PythonDev admin$ ls
+		
+		see git documentation how to treat clones: https://help.github.com/articles/fetching-a-remote/
+		
+27.10.15 [air]		Merged POST-Test (see 24.09. & 04.10) python programs with GPIO test program
+
+		Created "Main" and "Import" structure based on recommendation in:
+		http://intermediate-and-advanced-software-carpentry.readthedocs.org/en/latest/structuring-python.html
+				
+		Main Program is: floperpi-main.py
+				
+		Created my first library "fplog.py" which provides a generic logging function: 
+				
+		def l(value, test="no")
+				
+		Which logs the "value" to the console, as well as to different file, depending whether the function is
+		executed as part of a library, or as part of a script!
+		
+		Created library "fppost.py", which implements the communication with the rails DB as a test ... so far
+		
+29.10.15 [pi]		Pulled data from repository into PI - works great! (see https://help.github.com/articles/fetching-a-remote)
+
+pi@raspberrypi ~/flowerpi $ ls
+dev_history.txt  gpiointest.pi  README.md
+pi@raspberrypi ~/flowerpi $ git pull
+remote: Counting objects: 24, done.
+remote: Total 24 (delta 0), reused 0 (delta 0), pack-reused 24
+Unpacking objects: 100% (24/24), done.
+From https://github.com/astaubert/flowerpi
+   3ce62a1..9fafd52  master     -> origin/master
+Updating 3ce62a1..9fafd52
+Fast-forward
+ dev_history.txt                |   58 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ flowerpi-main.py               |    5 +++++
+ flowerpi_post.py               |   39 +++++++++++++++++++++++++++++++++++++++
+ flowerpi_test.log              |   21 +++++++++++++++++++++
+ flowerpilog.pyc                |  Bin 0 -> 823 bytes
+ fplog.py                       |   26 ++++++++++++++++++++++++++
+ fplog.pyc                      |  Bin 0 -> 857 bytes
+ fppost.py                      |   40 ++++++++++++++++++++++++++++++++++++++++
+ gpiointest.pi => gpiointest.py |    0
+ test_complex_post.py           |    9 +++++++++
+ 10 files changed, 197 insertions(+), 1 deletion(-)
+ create mode 100644 flowerpi-main.py
+ create mode 100644 flowerpi_post.py
+ create mode 100644 flowerpi_test.log
+ create mode 100644 flowerpilog.pyc
+ create mode 100644 fplog.py
+ create mode 100644 fplog.pyc
+ create mode 100644 fppost.py
+ rename gpiointest.pi => gpiointest.py (100%)
+ create mode 100644 test_complex_post.py
+pi@raspberrypi ~/flowerpi $ ls
+dev_history.txt  flowerpi-main.py  flowerpi_test.log  fplog.pyc  gpiointest.py  test_complex_post.py
+flowerpilog.pyc  flowerpi_post.py  fplog.py           fppost.py  README.md
+pi@raspberrypi ~/flowerpi $ 
+
+		Created library "fpflow.py", which implements the interface to the water-flow sensor via GPIO-IN
+			
+30.10.15		Continued to work on fpflow.py, create two functions: wfstart and wfcount
+
+		Finished Test code in fpflow.py: waiting for water to flow (timeout 4 seconds), wait until water flow ends (output: counts)
+
+		Worked on mechanical setup of "Gieskanne" with a wateflow sensor attached and a "Box" that could contain the electronics
+
+		Added blue LED in fpflow.py to indicate system is waiting for water
+
+		Working on fppost.py
+
+		=> figured out the creating functions is not so helpful, since "requests" is used for most post functions anyway!
+
+31.10.15		Created library "fprfid.py" based on "rfid_example.py" from D.J.Whale
+		(see: http://blog.whaleygeek.co.uk/raspberry-pi-rfid-tag-reader)
+
+		Changed GPIO setup in flowerpy.py to mode BCM, in order to comply with fprfid.py!
+
+01.11.15		Created new function to query if site is online in fppost.py: def poquerysite(logtype="production")
+
+		Worked on flowerpi-main.py on macbook
+
+		Debug flowerpi-main.py on raspberry PI ... PHASE 1-3 WORK!!!
+
+		PHASE4a also works: query if tag exists, if not create one.
+
+		NEXT step to implement: ...	# Store new record in 'waters'
+
+03.11.15	Implemented also green and red led to indicate success and failure in WEB communication ... WORKS!!!
+
+21.11.15	Implemented support for new hardware-switch and LED to detect whether fertilizer was used or not
+
+22.11.15	Debug new hardware-switch => works now
+
+		Installed telnetd for remote access, as desribed here: http://www.ronnutter.com/raspberry-pi-enabling-telnet/
+
+		pi@raspberrypi ~ $ sudo apt-get install telnetd
+
+		... installed 
+
+		IP address of PI is:
+
+		wlan0     Link encap:Ethernet  HWaddr 74:da:38:41:59:c0  inet addr:192.168.178.61 
+
+
+
+++++++++++++++++++++++++++++++++++++++++
+
+External libraries that need to be installed:
+
+	1.) requests (see: http://docs.python-requests.org)
+
+
+++++++++++++++++++++++++++++++++++++++++
+
+GPIO-Belegung [BCM notation!]:
+
+	in fpflow:
+
+		# Set to the GPIO required to monitor the waterflow sensor (BCM notation!)
+		GPIO_WATERFLOW_SENSOR = 22
+
+		# Set to the GPIO required to activate the blue LED (BCM notation!)
+		GPIO_BLUE_LED = 7
+
+	in fprfid:
+
+		# Set to the GPIO required to activate the blue LED (BCM notation!)
+		GPIO_YELLOW_LED = 11
+
+		# Set to the GPIO required to monitor the tag detect (OUT) line
+		CFG_TAG_DETECT = 4
+
+++++++++++++++++++++++++++++++++++++++++
+
+GIT UPLOAD:
+
+git add .
+git commit -m "my commit comment"
+git push -u origin master
+username: astaubert
+passwort: gi________5
+
+
+GIT DOWNLOAD (commit first!):
+
+git pull
+
+
+
