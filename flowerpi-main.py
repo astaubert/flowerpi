@@ -54,6 +54,15 @@ def blinkgreenled():
 		GPIO.output(GPIO_GREEN_LED, GPIO.LOW)
 		time.sleep(0.2)
 
+def blinkyellowled():
+
+	for x in range(0,4):
+		GPIO.output(GPIO_YELLOW_LED, GPIO.HIGH)
+		time.sleep(0.2)
+		GPIO.output(GPIO_YELLOW_LED, GPIO.LOW)
+		time.sleep(0.2)
+
+
 def getserial():
 
 	# Extract serial from cpuinfo file
@@ -179,6 +188,7 @@ def phase2readrfid():
 	rfid.waitNoTag()
 	fplog.l("Card removed")
 
+	blinkyellowled()
 	GPIO.output(GPIO_YELLOW_LED, GPIO.LOW)
 
 	fplog.l("PHASE2: done - RF-ID tag available")
@@ -371,17 +381,13 @@ while not(poquerysite()):
 	GPIO.output(GPIO_RED_LED, GPIO.HIGH)
 	time.sleep(2)
 
-# Let the GREEN LED shine. Indication: connection to web-application established
-GPIO.output(GPIO_RED_LED, GPIO.LOW)
-blinkgreenled()
-
 fplog.l("PHASE1: done - WEB-application available")
 
 # ------------------------------------------
 # PHASE2: Read RF-ID
 # ------------------------------------------
 
-# will be started below in PHASE3, in order to allow for a LOOP if not water was applied!
+# will be started below in PHASE3, in order to allow for a LOOP if no water was applied!
 
 # ------------------------------------------
 # PHASE3: Read water by means of waterflow sensor
