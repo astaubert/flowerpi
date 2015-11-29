@@ -170,11 +170,11 @@ def phase2readrfid():
 	rfid.waitTag()
 
 	fplog.l("Card is present")
+	blinkyellowled()
 
 	# This program expects Mifare cards
 	if not rfid.readMifare():
 		fplog.l("Error: The scanned RF-id tag is not a mifare card")
-		abortonerror()
 
 	# get unique ID if the card
 	rfidid = rfid.getUniqueId()
@@ -188,7 +188,6 @@ def phase2readrfid():
 	rfid.waitNoTag()
 	fplog.l("Card removed")
 
-	blinkyellowled()
 	GPIO.output(GPIO_YELLOW_LED, GPIO.LOW)
 
 	fplog.l("PHASE2: done - RF-ID tag available")
@@ -380,6 +379,8 @@ while not(poquerysite()):
 	blinkredled()
 	GPIO.output(GPIO_RED_LED, GPIO.HIGH)
 	time.sleep(2)
+	
+GPIO.output(GPIO_RED_LED, GPIO.LOW)
 
 fplog.l("PHASE1: done - WEB-application available")
 
