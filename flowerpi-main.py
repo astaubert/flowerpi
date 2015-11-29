@@ -268,8 +268,9 @@ def phase4storeinwebapp():
 	fplog.l("PHASE4: Tag is available (either existed or was newly created)")
 	
 	fertilizer = fertilizercheck()
+	datetime = "--"
 	
-	payload = {'tagsn': tagsn, 'pisn': PISERIAL, 'liter': WATERCOUNT, 'fertilizer' : fertilizer}
+	payload = {'tagsn': tagsn, 'pisn': PISERIAL, 'liter': WATERCOUNT, 'fertilizer' : fertilizer, 'datetime' : datetime}
 	r = requests.post(USEURL + '/waters.json', json=payload)
 
 	if r.status_code == 201:
