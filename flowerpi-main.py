@@ -170,11 +170,13 @@ def phase2readrfid():
 	rfid.waitTag()
 
 	fplog.l("Card is present")
-	#blinkyellowled()
 
 	# This program expects Mifare cards
 	if not rfid.readMifare():
 		fplog.l("Error: The scanned RF-id tag is not a mifare card")
+		blinkredled()
+		rfid.waitNoTag()
+		rfid.waitTag()
 
 	# get unique ID if the card
 	rfidid = rfid.getUniqueId()
@@ -182,6 +184,8 @@ def phase2readrfid():
 	# overriding GLOBAL variable with local content
 	global RFIDUID; RFIDUID = rfidid
 	fplog.l("Card UID:" + RFIDUID)
+	
+	blinkyellowled()
 
 	# wait for the card to be removed
 	fplog.l("Waiting for card to be removed...")
