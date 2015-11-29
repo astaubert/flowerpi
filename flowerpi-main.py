@@ -398,7 +398,7 @@ fplog.l("PHASE1: done - WEB-application available")
 # PHASE3: Read water by means of waterflow sensor
 # ------------------------------------------
 
-phase3readwater()
+# phase3readwater()
 
 # ------------------------------------------
 # PHASE4: Store the amount of water applied for the flower in the WEB-application
@@ -406,7 +406,7 @@ phase3readwater()
 
 fertilizercheck()
 
-phase4storeinwebapp()
+# phase4storeinwebapp()
 	
 # ENDE des Hauptprogramms
 
