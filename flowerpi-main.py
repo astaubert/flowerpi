@@ -170,7 +170,7 @@ def phase2readrfid():
 	rfid.waitTag()
 
 	fplog.l("Card is present")
-	blinkyellowled()
+	#blinkyellowled()
 
 	# This program expects Mifare cards
 	if not rfid.readMifare():
