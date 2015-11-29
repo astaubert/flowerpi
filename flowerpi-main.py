@@ -62,6 +62,17 @@ def blinkyellowled():
 		GPIO.output(GPIO_YELLOW_LED, GPIO.LOW)
 		time.sleep(0.2)
 
+def blinkyellowblueled():
+
+		for x in range(0,4):
+			GPIO.output(GPIO_YELLOW_LED, GPIO.HIGH)
+			time.sleep(0.2)
+			GPIO.output(GPIO_YELLOW_LED, GPIO.LOW)
+			GPIO.output(GPIO_BLUE_LED, GPIO.HIGH)
+			time.sleep(0.2)
+			GPIO.output(GPIO_BLUE_LED, GPIO.LOW)
+			time.sleep(0.2)
+
 
 def getserial():
 
@@ -269,6 +280,7 @@ def phase4storeinwebapp():
 
 		if r.status_code == 201:
 			fplog.l("... success in creating new flower")
+			blinkyellowblueled()
 			flower_hash = json.loads(r.text)
 			fplog.l('The ID of the new flower is: ' + str(flower_hash["id"]))		
 		else:
