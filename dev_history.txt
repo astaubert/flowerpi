@@ -159,9 +159,9 @@ pi@raspberrypi ~/flowerpi $
 			
 			===>>>>> cool: remote shutdown works as well !!!
 
-26.11.5	    Added WiFi-2 to wlan-configuration, based on: https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
+26.11.15	Added WiFi-2 to wlan-configuration, based on: https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
 
-
+29.11.15    Added code to upload new 'water record' to web application
 
 
 ++++++++++++++++++++++++++++++++++++++++

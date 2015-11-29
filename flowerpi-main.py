@@ -265,11 +265,22 @@ def phase4storeinwebapp():
 			fplog.l('Response text is: ' + str(r.text))
 			abortonerror()
 			
-	fplog.l("PHASE4: Tag is available")
+	fplog.l("PHASE4: Tag is available (either existed or was newly created)")
+	
+	fertilizer = fertilizercheck()
+	
+	payload = {'tagsn': tagsn, 'pisn': PISERIAL, 'liter': WATERCOUNT, 'fertilizer' : fertilizer}
+		r = requests.post(USEURL + '/waters.json', json=payload)
 
-	# Store new record in 'waters'
-
-	# ......
+	if r.status_code == 201:
+		fplog.l("... success in creating new water record")
+		water_hash = json.loads(r.text)
+		fplog.l('The ID of the new water is: ' + str(water_hash["id"]))		
+	else:
+		fplog.l("Sorry, was not able to create a new water record")
+		fplog.l('Response code is: ' + str(r.status_code))
+		fplog.l('Response text is: ' + str(r.text))
+		abortonerror()
 
 	blinkgreenled()
 
