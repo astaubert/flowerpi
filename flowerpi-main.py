@@ -382,42 +382,51 @@ RFIDUID = 0
 # Define global variable for counts of water
 WATERCOUNT = 0
 
+
+# ------------------------------------------
+# PHASE0: Main Program Loop
+# ------------------------------------------
+
+while True:
+	
+	fplog.l("PHASE0: Main Program Loop")
+
 # ------------------------------------------
 # PHASE1: Test if internet-connection to web-application is present
 # ------------------------------------------
 
-# Let the RED LED shine. Indication: APP is up, but looking for Internet
-GPIO.output(GPIO_RED_LED, GPIO.HIGH)
-
-while not(poquerysite()):
-	fplog.l("error: " + str(USEURL) + " not accessible")
-	blinkredled()
+	# Let the RED LED shine. Indication: APP is up, but looking for Internet
 	GPIO.output(GPIO_RED_LED, GPIO.HIGH)
-	time.sleep(2)
-	
-GPIO.output(GPIO_RED_LED, GPIO.LOW)
 
-fplog.l("PHASE1: done - WEB-application available")
+	while not(poquerysite()):
+		fplog.l("error: " + str(USEURL) + " not accessible")
+		blinkredled()
+		GPIO.output(GPIO_RED_LED, GPIO.HIGH)
+		time.sleep(2)
+	
+	GPIO.output(GPIO_RED_LED, GPIO.LOW)
+
+	fplog.l("PHASE1: done - WEB-application available")
 
 # ------------------------------------------
 # PHASE2: Read RF-ID
 # ------------------------------------------
 
-# will be started below in PHASE3, in order to allow for a LOOP if no water was applied!
+	# will be started below in PHASE3, in order to allow for a LOOP if no water was applied!
 
 # ------------------------------------------
 # PHASE3: Read water by means of waterflow sensor
 # ------------------------------------------
 
-phase3readwater()
+	phase3readwater()
 
 # ------------------------------------------
 # PHASE4: Store the amount of water applied for the flower in the WEB-application
 # ------------------------------------------
 
-fertilizercheck()
+	fertilizercheck()
 
-phase4storeinwebapp()
+	phase4storeinwebapp()
 	
 # ENDE des Hauptprogramms
 

@@ -161,7 +161,13 @@ pi@raspberrypi ~/flowerpi $
 
 26.11.15	Added WiFi-2 to wlan-configuration, based on: https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
 
-29.11.15    Added code to upload new 'water record' to web application
+29.11.15    Added code to upload new 'water record' to web application ===>> WORKS :-))
+
+			Implemented LED color schema according to https://immense-cliffs-8170.herokuapp.com/piflowtable.html
+			
+			Implemented infinite loop in flowerpi-main.py
+			
+			
 
 
 ++++++++++++++++++++++++++++++++++++++++
