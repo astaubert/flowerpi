@@ -270,7 +270,7 @@ def phase4storeinwebapp():
 	fertilizer = fertilizercheck()
 	
 	payload = {'tagsn': tagsn, 'pisn': PISERIAL, 'liter': WATERCOUNT, 'fertilizer' : fertilizer}
-		r = requests.post(USEURL + '/waters.json', json=payload)
+	r = requests.post(USEURL + '/waters.json', json=payload)
 
 	if r.status_code == 201:
 		fplog.l("... success in creating new water record")
