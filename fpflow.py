@@ -59,7 +59,7 @@ def wfcount(second, logtype="prod"):
 
 		if not(input) and signal:
 			count += 1
-			signal = True
+			signal = False      # 2015-12-13 change signal to False (was true)
 
 		et = time.clock()
 
