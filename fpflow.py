@@ -49,7 +49,9 @@ def wfcount(second, logtype="prod"):
 	st = time.clock()
 	et = st
 
-	while (et-st)<second:
+	# 2015-12-13 change difference below from "second" to "2" (which means 2 seconds)
+	
+	while (et-st)<2:
 		input = GPIO.input(GPIO_WATERFLOW_SENSOR)
 		if input and not(signal):
 			count += 1

@@ -217,6 +217,14 @@ git pull
 
 +++++++++++++++++++++
 
+REMOTE ACCESS to PI:
+
+ssh pi@raspberrypi
+
+pi@raspberrypi's password: pi.....e
+
+‚+++++++++++++++++++++
+
 SHUTDONW:
 
 sudo shutdown -h now
