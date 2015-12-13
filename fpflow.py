@@ -42,7 +42,7 @@ def wfcount(second, logtype="prod"):
 	fplog.l("=> in fpflow.py/wfcount",logtype)
 
 	count = 0
-	signal = False
+	last_input = False
 
 	# st Start Time
 
@@ -53,14 +53,10 @@ def wfcount(second, logtype="prod"):
 	
 	while (et-st)<2:
 		input = GPIO.input(GPIO_WATERFLOW_SENSOR)
-		if input and not(signal):
+		if input != last_input:
 			count += 1
-			signal = True
-
-		if not(input) and signal:
-			count += 1
-			signal = False      # 2015-12-13 change signal to False (was true)
-
+		
+		last_input = input
 		et = time.clock()
 
 	fplog.l("<= out wfcount, return value: count = " + str(count),logtype)
