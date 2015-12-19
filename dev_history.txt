@@ -168,6 +168,10 @@ pi@raspberrypi ~/flowerpi $
 			Implemented infinite loop in flowerpi-main.py
 			
 			===>> Works :-)), was able to demonstrate a couple of "waterings" after each other!
+			
+19.12.15	Renamed log-files to fp_prod.log and fp_test.log
+
+			
 
 
 ++++++++++++++++++++++++++++++++++++++++

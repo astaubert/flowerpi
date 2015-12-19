@@ -17,13 +17,13 @@ def l(value, logtype="prod"):
 		print logstring
 	
 	if str(logtype) == "prod":
-		myfile = open("flowerpi_prod.log", "a")
+		myfile = open("fp_prod.log", "a")
 		myfile.write(logstring)
 		myfile.write("\n")
 		myfile.close()
 
 	if str(logtype) == "test":
-  		myfile = open("flowerpi_test.log", "a")
+  		myfile = open("fp_test.log", "a")
   		myfile.write(logstring)
 		myfile.write("\n")
 		myfile.close()
