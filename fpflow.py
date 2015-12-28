@@ -54,7 +54,7 @@ def wfcount(seconds, logtype="prod"):
 		input = GPIO.input(GPIO_WATERFLOW_SENSOR)
 		if input != last_input:
 			count += 1
-			last_input = input
+		last_input = input
 		
 		et = time.clock()
 
