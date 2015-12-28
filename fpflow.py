@@ -31,9 +31,9 @@ def wfstart(second, logtype="prod"):
 
 	while start<startcondition and not(timeout):
 		start = wfcount(1.5)
-		if time.clock()-timestart > second:
+		if time.clock()-timestart>second:
 			timeout = True
-		if start>=startcondition
+		if start>=startcondition:
 			timeout = False
 
 	fplog.l("<= out wfstart, return value: timeout = " + str(timeout),logtype)
