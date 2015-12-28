@@ -171,6 +171,8 @@ pi@raspberrypi ~/flowerpi $
 			
 19.12.15	Renamed log-files to fp_prod.log and fp_test.log
 
+28.12.15	Worked on fpflow.wfcount in order to increase count-values (Aufloesung) of watering-events
+
 			
 
 
@@ -193,16 +195,9 @@ GPIO-Belegung [BCM notation!]:
 		# Set to the GPIO required to activate the blue LED (BCM notation!)
 		GPIO_BLUE_LED = 7
 
-	in fprfid:
+	in flowerpi-main.py:
 
-		# Set to the GPIO required to activate the blue LED (BCM notation!)
-		GPIO_YELLOW_LED = 11
-
-		# Set to the GPIO required to monitor the tag detect (OUT) line
-		CFG_TAG_DETECT = 4
-		
-		
-		.... add more !!!
+       ... see sourcecode!
 
 ++++++++++++++++++++++++++++++++++++++++
 

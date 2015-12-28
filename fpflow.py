@@ -38,7 +38,7 @@ def wfstart(second, logtype="prod"):
 
 # Function to count the waterflow; second = time of counting, return value = counts
 #
-def wfcount(second, logtype="prod"):
+def wfcount(seconds, logtype="prod"):
 	fplog.l("=> in fpflow.py/wfcount",logtype)
 
 	count = 0
@@ -48,15 +48,14 @@ def wfcount(second, logtype="prod"):
 
 	st = time.clock()
 	et = st
-
-	# 2015-12-13 change difference below from "second" to "2" (which means 2 seconds)
 	
-	while (et-st)<2:
-		input = GPIO.input(GPIO_WATERFLOW_SENSOR)
-		if input != last_input:
-			count += 1
+	while (et-st)<seconds:
+		for x in range(0, 100):
+			input = GPIO.input(GPIO_WATERFLOW_SENSOR)
+			if input != last_input:
+				count += 1
+				last_input = input
 		
-		last_input = input
 		et = time.clock()
 
 	fplog.l("<= out wfcount, return value: count = " + str(count),logtype)
