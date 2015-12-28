@@ -173,6 +173,14 @@ pi@raspberrypi ~/flowerpi $
 
 28.12.15	Worked on fpflow.wfcount in order to increase count-values (Aufloesung) of watering-events
 
+			Implemented script to restart WLAN if lost, based on:
+			
+			    http://weworkweplay.com/play/rebooting-the-raspberry-pi-when-it-loses-wireless-connection-wifi/
+			
+			Change IP address from DHCP to static - 192.168.178.37 (sudo nano /etc/network/interfaces), based on:
+			
+			    http://weworkweplay.com/play/automatically-connect-a-raspberry-pi-to-a-wifi-network/
+
 			
 
 
@@ -182,6 +190,16 @@ External libraries that need to be installed:
 
 	1.) requests (see: http://docs.python-requests.org)
 
+
+++++++++++++++++++++++++++++++++++++++++
+
+Changes to Raspberry PI Linux environment:
+
+28.12.15:   Implemented script in order to re-start WLAN in case it is lost, check every 2 minutes
+
+			based on: http://weworkweplay.com/play/rebooting-the-raspberry-pi-when-it-loses-wireless-connection-wifi/
+			
+			(changed from 5 minutes to 2 minutes)
 
 ++++++++++++++++++++++++++++++++++++++++
 
