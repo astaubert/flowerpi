@@ -221,7 +221,7 @@ def phase3readwater():
 		# Blaue LED einschalten
 		GPIO.output(GPIO_BLUE_LED, GPIO.HIGH)
 		fplog.l("PHASE3: Waiting for water to flow, timeout 10 seconds")
-		nostart = fpflow.wfstart(10, "no")	
+		nostart = fpflow.wfstart(10)	
 		if nostart:
 			fplog.l("Timout kicked in, no water is flowing")
 			GPIO.output(GPIO_BLUE_LED, GPIO.LOW)
@@ -235,7 +235,7 @@ def phase3readwater():
 	totalcount = 0
 
 	while count > 10:
-		count = fpflow.wfcount(1)
+		count = fpflow.wfcount(2)
 		totalcount += count
 		if GPIO.input(GPIO_BLUE_LED) == 1:
 			GPIO.output(GPIO_BLUE_LED, GPIO.LOW)
