@@ -29,7 +29,7 @@ def wfstart(second, logtype="prod"):
 	# Wait for water to flow, unless timeout "seconds" kicks in
 
 	while start<10 and not(timeout):
-		start = wfcount(0.1)
+		start = wfcount(1)
 		if time.clock()-timestart > second:
 			timeout = True
 
