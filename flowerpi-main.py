@@ -250,9 +250,7 @@ def phase3readwater():
 	
 	global WATERCOUNT; WATERCOUNT = int(totalcount * 1.76)
 
-	fplog.l("Final pulses from waterflow sensor:" + str(WATERCOUNT))
-
-	fplog.l("PHASE3: done - Amount of water available")
+	fplog.l("PHASE3: done - Amount of water available = " + str(WATERCOUNT) + " mL")
 	GPIO.output(GPIO_BLUE_LED, GPIO.LOW)
 
 # Function: Phase 4 of main program flow: STORE INFORMATION in WEB APPLICATION
