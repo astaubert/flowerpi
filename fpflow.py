@@ -33,8 +33,6 @@ def wfstart(second, logtype="prod"):
 		if time.clock()-timestart>second:
 			timeout = True
 			counts = 0
-		if start>=startcondition:
-			timeout = False
 
 	fplog.l("<= out wfstart, return value: timeout = " + str(timeout),logtype)
 	return counts
