@@ -225,6 +225,8 @@ def phase3readwater():
 		if counts==0:
 			fplog.l("Timout kicked in, no water is flowing")
 			GPIO.output(GPIO_BLUE_LED, GPIO.LOW)
+		else:
+			nostart = False
 
 	# Water is flowing, start to count the water ...
 
