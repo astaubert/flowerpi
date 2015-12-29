@@ -244,8 +244,11 @@ def phase3readwater():
 		else:
 			GPIO.output(GPIO_BLUE_LED, GPIO.HIGH)
 	
-	# ovorriding GLOBAL variable with local content
-	global WATERCOUNT; WATERCOUNT = totalcount
+	fplog.l("Final pulses from waterflow sensor:" + str(totalcount))
+
+	# ovorriding GLOBAL variable with local content; Division of factor 0,568 turns counts into mL
+	
+	global WATERCOUNT; WATERCOUNT = int(totalcount / 0,5683)
 
 	fplog.l("Final pulses from waterflow sensor:" + str(WATERCOUNT))
 
