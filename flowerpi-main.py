@@ -248,7 +248,7 @@ def phase3readwater():
 
 	# overriding GLOBAL variable with local content; Division of factor 1.76 mL/counts, turns counts into mL
 	
-	global WATERCOUNT; WATERCOUNT = int(totalcount / 1.76)
+	global WATERCOUNT; WATERCOUNT = int(totalcount * 1.76)
 
 	fplog.l("Final pulses from waterflow sensor:" + str(WATERCOUNT))
 
