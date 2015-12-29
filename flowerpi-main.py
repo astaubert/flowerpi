@@ -237,7 +237,7 @@ def phase3readwater():
 	totalcount = counts
 
 	while count > 10:
-		count = fpflow.wfcount(2)
+		count = fpflow.wfcount(1)
 		totalcount += count
 		if GPIO.input(GPIO_BLUE_LED) == 1:
 			GPIO.output(GPIO_BLUE_LED, GPIO.LOW)
