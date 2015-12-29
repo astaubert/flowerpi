@@ -181,7 +181,11 @@ pi@raspberrypi ~/flowerpi $
 			
 			    http://weworkweplay.com/play/automatically-connect-a-raspberry-pi-to-a-wifi-network/
 
-			
+29.12.15	Evaluated conversion factor from count to mL: 
+
+			# overriding GLOBAL variable with local content; Division of factor 0,568 turns counts into mL
+
+			global WATERCOUNT; WATERCOUNT = int(totalcount / 0,5683)		
 
 
 ++++++++++++++++++++++++++++++++++++++++
