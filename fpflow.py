@@ -21,23 +21,23 @@ def wfstart(second, logtype="prod"):
 
 	fplog.l("=> in fpflow.py/wfstart",logtype)
 
-	start = 0
-	signal = False
+	counts = 0
 	timestart = time.clock()
 	timeout = False
 	startcondition = 4   # Number of counts to detect water is flowing
 
 	# Wait for water to flow, unless timeout "seconds" kicks in
 
-	while start<startcondition and not(timeout):
-		start = wfcount(1.5)
+	while counts<startcondition and not(timeout):
+		counts = wfcount(1.5)
 		if time.clock()-timestart>second:
 			timeout = True
+			counts = 0
 		if start>=startcondition:
 			timeout = False
 
 	fplog.l("<= out wfstart, return value: timeout = " + str(timeout),logtype)
-	return timeout
+	return counts
 
 # Function to count the waterflow; second = time of counting, return value = counts
 #
