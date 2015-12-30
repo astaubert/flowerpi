@@ -173,7 +173,7 @@ pi@raspberrypi ~/flowerpi $
 
 28.12.15	Worked on fpflow.wfcount in order to increase count-values (Aufloesung) of watering-events
 
-			Implemented script to restart WLAN if lost, based on:
+			Implemented script and CRONTAB to restart WLAN if lost, based on:
 			
 			    http://weworkweplay.com/play/rebooting-the-raspberry-pi-when-it-loses-wireless-connection-wifi/
 			
@@ -212,6 +212,82 @@ pi@raspberrypi ~/flowerpi $
 			fplog 2015-12-30 16:29:24: PHASE2: wait for RF-ID tag
 
 			Created version of FlowerPI V01.02.00
+			
+			Added automatic startup of flowerpi-main.py at startup of Raspberrypi based on:
+			
+			http://raspberrypi.stackexchange.com/questions/28199/raspberry-pi-starting-programs-automatically-on-startup
+			
+			Using daemontools:
+			
+			pi@raspberrypi ~ $ sudo apt-get install daemontools daemontools-run
+			Reading package lists... Done
+			Building dependency tree       
+			Reading state information... Done
+			The following NEW packages will be installed:
+			  daemontools daemontools-run
+			0 upgraded, 2 newly installed, 0 to remove and 0 not upgraded.
+			Need to get 75.2 kB of archives.
+			After this operation, 338 kB of additional disk space will be used.
+			Get:1 http://mirrordirector.raspbian.org/raspbian/ wheezy/main daemontools armhf 1:0.76-3 [65.8 kB]
+			Get:2 http://mirrordirector.raspbian.org/raspbian/ wheezy/main daemontools-run all 1:0.76-3 [9,324 B]
+			Fetched 75.2 kB in 0s (125 kB/s)      
+			Selecting previously unselected package daemontools.
+			(Reading database ... 79097 files and directories currently installed.)
+			Unpacking daemontools (from .../daemontools_1%3a0.76-3_armhf.deb) ...
+			Selecting previously unselected package daemontools-run.
+			Unpacking daemontools-run (from .../daemontools-run_1%3a0.76-3_all.deb) ...
+			Processing triggers for man-db ...
+			Setting up daemontools (1:0.76-3) ...
+			Setting up daemontools-run (1:0.76-3) ...
+			Adding SV inittab entry...
+
+			pi@raspberrypi ~ $ sudo mkdir -p /service/flowerpi
+			
+			pi@raspberrypi ~ $ sudo cat > /service/flowerpi/run <<EOF
+			> #!/bin/sh
+			> sudo python /home/pi/flowerpi/flowerpi-main.py
+			
+			pi@raspberrypi ~ $ cd /etc/service/
+			pi@raspberrypi /etc/service $ sudo ln -s /service/flowerpi .
+			pi@raspberrypi /etc/service $ ls -la
+			total 8
+			drwxr-xr-x   2 root root 4096 Dec 30 17:10 .
+			drwxr-xr-x 103 root root 4096 Dec 30 16:17 ..
+			lrwxrwxrwx   1 root root   17 Dec 30 17:10 flowerpi -> /service/flowerpi
+			pi@raspberrypi /etc/service $
+			
+			Cool ===>>> WORKS! Python program starts automatically on boot, or re-starts upon crash ;-))
+			
+			Another source with usefull commands for daemontools:
+			
+			http://lgallardo.com/en/2013/05/06/daemontools-o-como-relanzar-un-proceso-si-muere/
+			
+			check how long program did run:
+			
+			pi@raspberrypi ~/flowerpi $ ps ax | grep flowerpi
+			 2230 ?        S      0:00 supervise flowerpi
+			 2233 ?        S      0:00 sudo python /home/pi/flowerpi/flowerpi-main.py
+			 2235 ?        S      0:02 python /home/pi/flowerpi/flowerpi-main.py
+			 2535 pts/0    S+     0:00 grep --color=auto flowerpi
+			
+			other way to check if program / service is running my means of using SVSTAT:
+			
+			pi@raspberrypi ~/flowerpi $ sudo svstat /etc/service/flowerpi
+			/etc/service/flowerpi: up (pid 2231) 978 seconds
+			
+			STOPPING the service:
+			
+			pi@raspberrypi ~ $ sudo svc -d /etc/service/flowerpi
+  
+			pi@raspberrypi ~ $ sudo svstat /etc/service/flowerpi
+			/etc/service/flowerpi: down 113 seconds, normally up
+
+
+			STARTING the service:
+
+			pi@raspberrypi ~ $ sudo svc -u /etc/service/flowerpi
+			
+			
 
 ++++++++++++++++++++++++++++++++++++++++
 
@@ -224,11 +300,17 @@ External libraries that need to be installed:
 
 Changes to Raspberry PI Linux environment:
 
-28.12.15:   Implemented script in order to re-start WLAN in case it is lost, check every 2 minutes
+28.12.15:   Implemented script and CRONTAB in order to re-start WLAN in case it is lost, check every 1 minute
 
 			based on: http://weworkweplay.com/play/rebooting-the-raspberry-pi-when-it-loses-wireless-connection-wifi/
 			
-			(changed from 5 minutes to 2 minutes WLAN check)
+			(changed from 5 minutes to 1 minutes WLAN check)
+			
+30.12.15:	Implemented script and DAEMONTOOLS in order to start application
+
+			based on: http://raspberrypi.stackexchange.com/questions/28199/raspberry-pi-starting-programs-automatically-on-startup
+			
+			and: http://lgallardo.com/en/2013/05/06/daemontools-o-como-relanzar-un-proceso-si-muere/
 
 ++++++++++++++++++++++++++++++++++++++++
 
