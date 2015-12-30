@@ -169,6 +169,8 @@ def fertilizercheck(logtype="prod"):
 #	
 def phase2readrfid():
 	
+	global RFIDREAD; RFIDREAD = False
+	
 	fplog.l("PHASE2: wait for RF-ID tag")
 
 	fertilizercheck()
@@ -203,8 +205,10 @@ def phase2readrfid():
 	fplog.l("Card removed")
 
 	GPIO.output(GPIO_YELLOW_LED, GPIO.LOW)
-
+	global RFIDREAD; RFIDREAD = True
+	
 	fplog.l("PHASE2: done - RF-ID tag available")
+
 
 # Function: Phase 3 of main program flow: READ FLOW of WATER
 #	
@@ -215,13 +219,16 @@ def phase3readwater():
 
 	while nostart:
 
-		# RF-ID leasen
-		phase2readrfid()
+		# RF-ID lesen
+		global RFIDREAD; RFIDREAD = False
+		
+		while not(RFIDREAD):
+			phase2readrfid()
 
 		# Blaue LED einschalten
 		GPIO.output(GPIO_BLUE_LED, GPIO.HIGH)
 		fplog.l("PHASE3: Waiting for water to flow, timeout 10 seconds")
-		counts = fpflow.wfstart(10)	
+		counts = fpflow.wfstart(3)	
 		if counts==0:
 			fplog.l("Timout kicked in, no water is flowing")
 			GPIO.output(GPIO_BLUE_LED, GPIO.LOW)
@@ -384,6 +391,9 @@ RFIDUID = 0
 
 # Define global variable for counts of water
 WATERCOUNT = 0
+
+# Define global variable which inidicates an RFID was read
+RFIDREAD = False
 
 
 # ------------------------------------------

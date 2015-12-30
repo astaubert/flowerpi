@@ -186,6 +186,12 @@ pi@raspberrypi ~/flowerpi $
 			# overriding GLOBAL variable with local content; Division of factor 1.76 mL/counts, turns counts into mL
 
 			global WATERCOUNT; WATERCOUNT = int(totalcount * 1.76)		
+			
+			==> Calibration of counts to water in mL ===>>> WORKS :-))) 
+			
+			Created version of FlowerPI V01.01.00
+			
+30.12.15	Tried to reduce crashes during "reading of the RF-ID"
 
 
 ++++++++++++++++++++++++++++++++++++++++
@@ -203,7 +209,7 @@ Changes to Raspberry PI Linux environment:
 
 			based on: http://weworkweplay.com/play/rebooting-the-raspberry-pi-when-it-loses-wireless-connection-wifi/
 			
-			(changed from 5 minutes to 2 minutes)
+			(changed from 5 minutes to 2 minutes WLAN check)
 
 ++++++++++++++++++++++++++++++++++++++++
 
