@@ -73,7 +73,8 @@ def blinkyellowblueled():
 			GPIO.output(GPIO_BLUE_LED, GPIO.LOW)
 			time.sleep(0.2)
 
-
+# Read Serial Number of Raspberry Pi - identifies watering can
+#
 def getserial():
 
 	# Extract serial from cpuinfo file
@@ -223,7 +224,11 @@ def phase3readwater():
 		global RFIDREAD; RFIDREAD = False
 		
 		while not(RFIDREAD):
-			phase2readrfid()
+			try:
+				phase2readrfid()
+			except Exception:
+				fplog.l("Error: Exception during execution of phase2readrfid()")
+				blinkredled()
 
 		# Blaue LED einschalten
 		GPIO.output(GPIO_BLUE_LED, GPIO.HIGH)
