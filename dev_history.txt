@@ -288,6 +288,9 @@ pi@raspberrypi ~/flowerpi $
 			pi@raspberrypi ~ $ sudo svc -u /etc/service/flowerpi
 			
 			
+			Set timeout for watering back to 10 seconds ==> Created version of FlowerPI V01.02.01
+			
+			
 
 ++++++++++++++++++++++++++++++++++++++++
 
