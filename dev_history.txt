@@ -243,9 +243,12 @@ pi@raspberrypi ~/flowerpi $
 
 			pi@raspberrypi ~ $ sudo mkdir -p /service/flowerpi
 			
-			pi@raspberrypi ~ $ sudo cat > /service/flowerpi/run <<EOF
-			> #!/bin/sh
-			> sudo python /home/pi/flowerpi/flowerpi-main.py
+			pi@raspberrypi ~ $ sudo nano run
+
+			#!/bin/sh
+			sudo rm -rf /service/flowerpi/fp_prod.log
+			sudo rm -rf /service/flowerpi/fp_test.log
+			sudo python /home/pi/flowerpi/flowerpi-main.py
 			
 			pi@raspberrypi ~ $ cd /etc/service/
 			pi@raspberrypi /etc/service $ sudo ln -s /service/flowerpi .
@@ -290,6 +293,7 @@ pi@raspberrypi ~/flowerpi $
 			
 			Set timeout for watering back to 10 seconds ==> Created version of FlowerPI V01.02.01
 			
+			Bugfix, logtype was set to "test" instead of "prod" ==> Created version of FlowerPI V01.02.02
 			
 
 ++++++++++++++++++++++++++++++++++++++++

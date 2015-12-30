@@ -278,7 +278,7 @@ def phase4storeinwebapp():
 	
 	# Query if tag is existing, if not, create one
 
-	querytag = poquerytag(tagsn, "test")
+	querytag = poquerytag(tagsn, "prod")
 	
 	if querytag == "existing":
 		fplog.l('Tag matches to following flower: ')
