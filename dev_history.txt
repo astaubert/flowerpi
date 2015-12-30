@@ -211,6 +211,7 @@ pi@raspberrypi ~/flowerpi $
 			fplog 2015-12-30 16:29:22: Error: Exception during execution of phase2readrfid()
 			fplog 2015-12-30 16:29:24: PHASE2: wait for RF-ID tag
 
+			Created version of FlowerPI V01.02.00
 
 ++++++++++++++++++++++++++++++++++++++++
 
