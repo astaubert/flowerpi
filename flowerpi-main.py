@@ -206,7 +206,8 @@ def phase2readrfid():
 	fplog.l("Card removed")
 
 	GPIO.output(GPIO_YELLOW_LED, GPIO.LOW)
-	global RFIDREAD; RFIDREAD = True
+
+	RFIDREAD = True
 	
 	fplog.l("PHASE2: done - RF-ID tag available")
 

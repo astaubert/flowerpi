@@ -193,6 +193,24 @@ pi@raspberrypi ~/flowerpi $
 			
 30.12.15	Tried to reduce crashes during "reading of the RF-ID"
 
+			# RF-ID lesen
+			global RFIDREAD; RFIDREAD = False
+
+			while not(RFIDREAD):
+				try:
+					phase2readrfid()
+				except Exception:
+					fplog.l("Error: Exception during execution of phase2readrfid()")
+					blinkredled()
+			
+			Was able to reproduce a problem once where the card was not read properly ===>>> Works:
+			
+			fplog 2015-12-30 16:29:05: Waiting for a card...
+			fplog 2015-12-30 16:29:07: Card is present
+			fplog 2015-12-30 16:29:07: Error: The scanned RF-id tag is not a mifare card
+			fplog 2015-12-30 16:29:22: Error: Exception during execution of phase2readrfid()
+			fplog 2015-12-30 16:29:24: PHASE2: wait for RF-ID tag
+
 
 ++++++++++++++++++++++++++++++++++++++++
 
