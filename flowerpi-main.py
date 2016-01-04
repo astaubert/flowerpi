@@ -156,10 +156,10 @@ def fertilizercheck(logtype="prod"):
 
 	if input:
 		GPIO.output(GPIO_ORANGE_LED, GPIO.HIGH)
-		fertilizer = 1
+		fertilizer = "yes"
 	else:
 		GPIO.output(GPIO_ORANGE_LED, GPIO.LOW)
-		fertilizer = 0
+		fertilizer = "no"
 
 	fplog.l("<= out fertilizercheck, return value: fertilizer = " + str(fertilizer),logtype)
 

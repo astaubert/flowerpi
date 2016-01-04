@@ -301,6 +301,9 @@ pi@raspberrypi ~/flowerpi $
 			
 			==> Created version V01.02.03
 			
+			Change fertilizercheck result from 0/1 to no/yes
+			
+			==> Created version V01.02.04
 
 ++++++++++++++++++++++++++++++++++++++++
 
