@@ -337,7 +337,7 @@ fplog.l("+++ In: flowerpi-main.py +++")
 # ------------------------------------------
 
 # URL of web application
-USEURL = 'https://immense-cliffs-8170.herokuapp.com'
+USEURL = 'https://gentle-taiga-6367.herokuapp.com'
 
 # BCM (GPIO Nummern) verwenden um mit fprfid compatibel zu sein!
 GPIO.setmode(GPIO.BCM)

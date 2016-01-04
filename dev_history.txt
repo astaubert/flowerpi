@@ -295,6 +295,12 @@ pi@raspberrypi ~/flowerpi $
 			
 			Bugfix, logtype was set to "test" instead of "prod" ==> Created version of FlowerPI V01.02.02
 			
+04.01.16	Changed WEB-URL to: gentle-taiga-6367.herokuapp.com
+
+			After creating a new Heroku APP (after deployment problem of changed flowerpi-heroku rails app)
+			
+			==> Created version V01.02.03
+			
 
 ++++++++++++++++++++++++++++++++++++++++
 
