@@ -13,6 +13,10 @@ def l(value, logtype="prod"):
 	stamp = str(datetime.datetime.now()).split('.')[0]
 	logstring = "fplog " + stamp + ": " + str(value)
 	
+	#added to normalize unicode values to ascii values, not to get problems with printout on console
+	#based on: http://stackoverflow.com/questions/1207457/convert-a-unicode-string-to-a-string-in-python-containing-extra-symbols
+	logstring.encode('ascii','ignore')
+	
 	if str(logtype) == "prod" or str(logtype) == "test":
 		print logstring
 	

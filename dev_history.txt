@@ -304,6 +304,13 @@ pi@raspberrypi ~/flowerpi $
 			Change fertilizercheck result from 0/1 to no/yes
 			
 			==> Created version V01.02.04
+			
+17.01.16	Tried to fix crash, when watering flowertype: "Kräuter". Root cause might be the "ä"
+			In order to fix, added the following code in fplog.py:
+			
+			#added to normalize unicode values to ascii values, not to get problems with printout on console
+			#based on: http://stackoverflow.com/questions/1207457/convert-a-unicode-string-to-a-string-in-python-containing-extra-symbols
+			logstring.encode('ascii','ignore')
 
 ++++++++++++++++++++++++++++++++++++++++
 
