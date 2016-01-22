@@ -285,6 +285,7 @@ def phase4storeinwebapp():
 		r = requests.get(USEURL + '/flowerquery/' + str(tagsn))
 		flower_hash = json.loads(r.text)
 		flower = str(flower_hash["flowertype"])
+		flower.encode('ascii','ignore')
 		fplog.l('The flower is a: ' + flower)
 
 	else:
