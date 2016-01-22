@@ -284,7 +284,8 @@ def phase4storeinwebapp():
 		fplog.l('Tag matches to following flower: ')
 		r = requests.get(USEURL + '/flowerquery/' + str(tagsn))
 		fplog.l("still alive 1")
-		r.encode('ascii','ignore')
+		data = r
+		r = dict([(str(k), v) for k, v in data.items()])
 		fplog.l("still alive 2")
 		fplog.l(r.text)
 		fplog.l("still alive 3")
