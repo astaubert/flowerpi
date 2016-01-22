@@ -283,7 +283,6 @@ def phase4storeinwebapp():
 	if querytag == "existing":
 		fplog.l('Tag matches to following flower: ')
 		r = requests.get(USEURL + '/flowerquery/' + str(tagsn))
-		r.encode('ascii','ignore')
 		fplog.l(r.text)
 				
 		flower_hash = json.loads(r.text)
