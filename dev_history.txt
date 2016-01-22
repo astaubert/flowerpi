@@ -314,6 +314,36 @@ pi@raspberrypi ~/flowerpi $
 
 			==> Created version V01.02.05
 			
+22.01.16	Tried to fix WLAN dropouts again - looks like it is a "Power" related problem
+
+			Implemented measures as described here:
+			http://raspberrypi.stackexchange.com/questions/5364/wifi-connection-gets-dropped-quite-often-with-edimax-ew-7711utn
+			
+			1.) add this to your /etc/network/interfaces
+
+			    wireless-power off
+			
+			2.) Found this explanation which states power management from the driver might be at fault. 
+				It also suggests using these changes for the driver:
+
+				sudo nano /etc/modprobe.d/8192cu.conf
+
+				and paste the following in:
+
+				# Disable power saving
+				options 8192cu rtw_power_mgnt=0 rtw_enusbss=1 rtw_ips_mode=1 
+				
+			Note: since the "EQ-7612UAN V2" uses the 8191u chipset, I also added:
+			
+			3.) sudo nano /etc/modprobe.d/8191cu.conf
+
+				and paste the following in:
+
+				# Disable power saving
+				options 8191cu rtw_power_mgnt=0 rtw_enusbss=1 rtw_ips_mode=1
+
+
+			
 ++++++++++++++++++++++++++++++++++++++++
 
 External libraries that need to be installed:
