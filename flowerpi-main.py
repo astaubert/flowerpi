@@ -285,10 +285,11 @@ def phase4storeinwebapp():
 		r = requests.get(USEURL + '/flowerquery/' + str(tagsn))
 		fplog.l("still alive 1")
 		data = r
-		r = dict([(str(k), v) for k, v in data.items()])
 		fplog.l("still alive 2")
-		fplog.l(r.text)
+		r = dict([(str(k), v) for k, v in data.items()])
 		fplog.l("still alive 3")
+		fplog.l(r.text)
+		fplog.l("still alive 4")
 		flower_hash = json.loads(r.text)
 		fplog.l('The flower is a: ' + str(flower_hash["flowertype"]))
 
