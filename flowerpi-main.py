@@ -210,6 +210,10 @@ def phase2readrfid():
 	RFIDREAD = True
 	
 	fplog.l("PHASE2: done - RF-ID tag available")
+	
+	if RFIDUID == "456765":
+		fplog.l("Read Shutdown-Tag; shutdown will be initiated; goodby!")
+		os.system("sudo shutdown -h now")
 
 
 # Function: Phase 3 of main program flow: READ FLOW of WATER

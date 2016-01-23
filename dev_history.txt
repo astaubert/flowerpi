@@ -343,6 +343,16 @@ pi@raspberrypi ~/flowerpi $
 				options 8191cu rtw_power_mgnt=0 rtw_enusbss=1 rtw_ips_mode=1
 				
 			After reboot, WLAN works immeditalley ==>> let's see how it behaves in the future ...
+			
+			HEUREKA: WLAN PROBLEM looks like solved :-)))
+			
+23.01.16	Implemented method to shut-down Raspberry PI after 'Shutdown-Tag' (attached to Gieskanne) was read
+
+			if RFIDUID == "456765":
+				fplog.l("Read Shutdown-Tag; shutdown will be initiated; goodby!")
+				os.system("sudo shutdown -h now")
+				
+			==> Created version V01.03.00			
 
 
 			
