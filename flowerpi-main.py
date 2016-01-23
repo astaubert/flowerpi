@@ -211,7 +211,7 @@ def phase2readrfid():
 	
 	fplog.l("PHASE2: done - RF-ID tag available")
 	
-	if RFIDUID == "456765":
+	if RFIDUID == "A1CF06B0":
 		fplog.l("Read Shutdown-Tag; shutdown will be initiated; goodby!")
 		os.system("sudo shutdown -h now")
 
