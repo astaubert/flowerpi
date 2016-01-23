@@ -354,9 +354,13 @@ pi@raspberrypi ~/flowerpi $
 				
 			==> Created version V01.03.00
 			
-			added:
+			added to flowerpi-main.py:
 			
-			import os			
+			import os
+			
+			==> Created version V01.03.03
+
+			HEUREKA: Tut :-)))			
 
 
 			
