@@ -352,7 +352,11 @@ pi@raspberrypi ~/flowerpi $
 				fplog.l("Read Shutdown-Tag; shutdown will be initiated; goodby!")
 				os.system("sudo shutdown -h now")
 				
-			==> Created version V01.03.00			
+			==> Created version V01.03.00
+			
+			added:
+			
+			import os			
 
 
 			

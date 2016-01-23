@@ -20,6 +20,7 @@ import RPi.GPIO as GPIO
 import time
 import requests
 import json
+import os
 
 # Import this module to gain access to the RFID driver:
 
