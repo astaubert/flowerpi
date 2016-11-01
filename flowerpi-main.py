@@ -291,6 +291,11 @@ def phase4storeinwebapp():
 		fplog.l(r.text)
 				
 		flower_hash = json.loads(r.text)
+
+		flower_id = str(flower_hash["id"])
+		flower_id.encode('ascii','ignore')		
+		fplog.l('The ID of the new flower is: ' + flower_id)
+		
 		flower = str(flower_hash["flowertype"])
 		flower.encode('ascii','ignore')
 		fplog.l('The flower is a: ' + flower)
@@ -306,7 +311,10 @@ def phase4storeinwebapp():
 			fplog.l("... success in creating new flower")
 			blinkyellowblueled()
 			flower_hash = json.loads(r.text)
-			fplog.l('The ID of the new flower is: ' + str(flower_hash["id"]))		
+			
+			flower_id = str(flower_hash["id"])
+			flower_id.encode('ascii','ignore')		
+			fplog.l('The ID of the new flower is: ' + flower_id)		
 		else:
 			fplog.l("Sorry, was not able to create a new tag")
 			fplog.l('Response code is: ' + str(r.status_code))
@@ -318,7 +326,7 @@ def phase4storeinwebapp():
 	fertilizer = fertilizercheck()
 	datetime = "--"
 	
-	payload = {'tagsn': tagsn, 'pisn': PISERIAL, 'liter': WATERCOUNT, 'fertilizer' : fertilizer, 'datetime' : datetime}
+	payload = {'tagsn': tagsn, 'pisn': PISERIAL, 'liter': WATERCOUNT, 'fertilizer' : fertilizer, 'datetime' : datetime, 'flower_id' : flower_id}
 	r = requests.post(USEURL + '/waters.json', json=payload)
 
 	if r.status_code == 201:

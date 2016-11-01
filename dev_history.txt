@@ -360,7 +360,13 @@ pi@raspberrypi ~/flowerpi $
 			
 			==> Created version V01.03.03
 
-			HEUREKA: Tut :-)))			
+			HEUREKA: Tut :-)))
+			
+01.11.16	Implemented logic to also store the 'flower_id' with a new water-record in flowerpi-main.py
+
+			payload = {'tagsn': tagsn, 'pisn': PISERIAL, 'liter': WATERCOUNT, 'fertilizer' : fertilizer, 'datetime' : datetime, 'flower_id' : flower_id}
+			
+			This is required in order to allow a relationship between flowers and waters on the basis of "flower_id" instead of "tagsn" (which might change over time! E.g. if flowers get inactive)
 
 
 			
