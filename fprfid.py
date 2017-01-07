@@ -22,8 +22,9 @@ import rfid
 # Import this module for generic logging used in flowerpi project
 import fplog
 
-# Set to the GPIO required to activate the blue LED (BCM notation!)
-GPIO_YELLOW_LED = 11
+# Set to the GPIO required to activate the yellow LED (BCM notation!)
+# GPIO_YELLOW_LED = 11
+# 07.01.17 commented-out because duplicate - see flowerpi-main.py
 
 
 # ...run automated tests if library is started as a script

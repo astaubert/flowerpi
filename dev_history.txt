@@ -367,7 +367,30 @@ pi@raspberrypi ~/flowerpi $
 			payload = {'tagsn': tagsn, 'pisn': PISERIAL, 'liter': WATERCOUNT, 'fertilizer' : fertilizer, 'datetime' : datetime, 'flower_id' : flower_id}
 			
 			This is required in order to allow a relationship between flowers and waters on the basis of "flower_id" instead of "tagsn" (which might change over time! E.g. if flowers get inactive)
+			
+			==> Created version V01.04.00
+			
+			HEUREKA: Tut :-)))	
+			
+07.01.17	Hinzufügen eines Temperatur-Sensors (DS18S20+TO92 Maxim), basierend auf folgenden Beschreibungen:
 
+			https://www.modmypi.com/blog/ds18b20-one-wire-digital-temperature-sensor-and-the-raspberry-pi
+			http://www.netzmafia.de/skripten/hardware/RasPi/Projekt-Onewire/
+			
+			Since GPIO4 was currently used by the RFID reader,
+			(see: http://skpang.co.uk/catalog/sl030-interface-cable-for-raspberry-pi-p-1222.html)
+			but is also required for the 1-wire driver for the temperature sensor,
+			this GPIO pin was changed from GPIO4 to GPIO13:
+			
+			see change in rfid/__init__.py
+			
+			from:
+			CFG_TAG_DETECT = 4
+			
+			to:
+			CFG_TAG_DETECT = 13
+
+			==> Created version V01.05.00
 
 			
 ++++++++++++++++++++++++++++++++++++++++
