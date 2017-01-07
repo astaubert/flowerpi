@@ -13,12 +13,13 @@
 
 # set to True to detect card presence by using GPIO
 # set to False to detect card presence by reading card status
-CFGEN_GPIO = True
+# CFGEN_GPIO = True
+CFGEN_GPIO = False
 
 # Set to the GPIO required to monitor the tag detect (OUT) line
 # CFG_TAG_DETECT = 4
 # 07.01.17 change by Andreas Staubert, since GPIO4 is required for temperature sensor
-CFG_TAG_DETECT = 13
+# CFG_TAG_DETECT = 13
 
 # The I2C address of the SL030 RFID tag reader
 CFG_ADDRESS = 0x50
