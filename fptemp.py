@@ -154,6 +154,6 @@ templog("PHASE1: Main Program Loop")
 while True:
 		tempc,tempf = read_temp()
 		templog("Celsius: " + str(tempc))
-		templof("Farenheit: " + str(tempf))
+		templog("Farenheit: " + str(tempf))
 		pushtemp(tempc.tempf)
 		time.sleep(3)
