@@ -118,7 +118,7 @@ def pushtemp(tempc,tempf):
 	
 	templog("==> in pushtemp")
 	
-	payload = {'pisn': PISERIAL, 'location': '-test-'}
+	payload = {'pisn': PISERIAL, 'location': '-test-', 'tempc' : tempc, 'tempf': tempf}
 	
 	r = requests.post(USEURL + '/temperatures.json', json=payload)
 
