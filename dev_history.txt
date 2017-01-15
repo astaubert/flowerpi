@@ -467,8 +467,13 @@ pi@raspberrypi ~/flowerpi $
 			(29.125, 84.425)
 			(28.75, 83.75)
 			(28.312, 82.9616)		
-
 			
+			Created various functions to support upload to flowerpiheroku V04.01.00
+			
+			==>> Heureka, TUT! Upload from temperatures from can to Internet works :-))
+
+			==> Created version V02.01.03
+						
 ++++++++++++++++++++++++++++++++++++++++
 
 External libraries that need to be installed:
