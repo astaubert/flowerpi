@@ -90,28 +90,27 @@ def getserial():
 #
 def poquerysite():
 
-		templog("=> in poquerysite") 
+	templog("=> in poquerysite") 
 
-		error = True
-		while error:
-			try:
-				templog('Try to query site: ' + str(USEURL))
-				r = requests.get(USEURL)
-				error = False
-			except:
-				templog('Error: Site not accessible')
-				blinkredled()
-				error = True
+	error = True
+	while error:
+		try:
+			templog('Try to query site: ' + str(USEURL))
+			r = requests.get(USEURL)
+			error = False
+		except:
+			templog('Error: Site not accessible')
+			error = True
 
-		templog('Got response from URL: ' + str(r)) 
+	templog('Got response from URL: ' + str(r)) 
 
-		sitestatus = "False"
-		if r.status_code == 200:
-			sitestatus = "True"
+	sitestatus = "False"
+	if r.status_code == 200:
+		sitestatus = "True"
 
-		templog("<= out poquerysite, return value: sitestatus = " + str(sitestatus))
+	templog("<= out poquerysite, return value: sitestatus = " + str(sitestatus))
 
-		return sitestatus
+	return sitestatus
 		
 # Function to upload temperature reading to web-site
 #
@@ -133,6 +132,7 @@ def pushtemp(tempc,tempf):
 		templog('Response text is: ' + str(r.text))
 		abortonerror()
 
+	templog("==> out pushtemp")
 
 # ################
 # MAIN APPLICATION
