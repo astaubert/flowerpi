@@ -121,7 +121,7 @@ def poquerysite():
 
 templog("PHASE0: Main Program Start")
 
-poquerysite
+poquerysite()
 
 templog("PHASE1: Main Program Loop")
 
