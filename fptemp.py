@@ -9,7 +9,7 @@ import time
 # os.system('modprobe w1-gpio')
 # os.system('modprobe w1-therm')
 
-# The next step is to define our sensor’s output file (the w1_slave file) 
+# The next step is to define our sensors output file (the w1_slave file) 
 
 temp_sensor = ‘sys/bus/w1/devices/10-0008032a0b1e/w1_slave’
 
