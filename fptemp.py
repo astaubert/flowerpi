@@ -11,7 +11,7 @@ import time
 
 # The next step is to define our sensors output file (the w1_slave file) 
 
-temp_sensor = ‘sys/bus/w1/devices/10-0008032a0b1e/w1_slave’
+temp_sensor = 'sys/bus/w1/devices/10-0008032a0b1e/w1_slave'
 
 # We then need to define a variable for our raw temperature value (temp_raw)
 
