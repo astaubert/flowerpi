@@ -152,9 +152,8 @@ PISERIAL = getserial()
 templog("PHASE1: Main Program Loop")
 
 while True:
-        # print(read_temp())
 		tempc,tempf = read_temp()
 		templog("Celsius: " + str(tempc))
 		templof("Farenheit: " + str(tempf))
 		pushtemp(tempc.tempf)
-        time.sleep(3)
+		time.sleep(3)
