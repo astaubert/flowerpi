@@ -147,12 +147,12 @@ poquerysite()
 templog("Try to get PI serial number")
 PISERIAL = getserial()
 
-
 templog("PHASE1: Main Program Loop")
 
 while True:
         # print(read_temp())
-		tempc , tempf = read_temp()
-		print "Celsius: " + tempc + " Farenheit: " + tempf
+		tempc,tempf = read_temp()
+		print "Celsius: " + tempc
+		print "Farenheit: " + tempf
 		pushtemp(tempc.tempf)
         time.sleep(3)
