@@ -391,6 +391,73 @@ pi@raspberrypi ~/flowerpi $
 			CFG_TAG_DETECT = 13
 
 			==> Created version V01.05.00
+			
+			Changing CFG_TAG_DETECT to GPIO 13 did not work - created various debug versions.
+			
+			Finally rolled back to GPIO4 - also in hardware wiring ...
+			
+			==> Created version V01.05.05
+			
+			Old status works again :-() ....
+			
+			Next approach, change GPIO setting of 1-wire connection from GPIO8 to something else. See:
+			https://www.raspberrypi.org/forums/viewtopic.php?p=518859#p518859
+			
+15.01.17	Temperatur-Sensor angeschlossen an GPIO21 (PIN40)
+
+			in /boot/config.txt folgendes eingefügt:
+			
+			dtoverlay=w1-gpio, gpiopin=21
+			
+			Danach reboot.
+			
+			Dann auf console folgendes ausgeführt um Treiber zu laden:
+			
+			pi@raspberrypi ~ $ modprobe w1-gpio pullup=1
+			pi@raspberrypi ~ $ modprobe w1-therm
+			
+			Ein Blick in das angelegte Verzeichnis:
+			
+			pi@raspberrypi ~ $ cd /sys/bus/
+			pi@raspberrypi /sys/bus $ ls
+			amba         container     hid              mmc       sdio     usb
+			clockevents  cpu           i2c              platform  snd_seq  w1
+			clocksource  event_source  iscsi_flashnode  scsi      spi      workqueue
+			
+			pi@raspberrypi /sys/bus $ cd w1
+			pi@raspberrypi /sys/bus/w1 $ ls
+			devices  drivers  drivers_autoprobe  drivers_probe  uevent
+			
+			pi@raspberrypi /sys/bus/w1 $ cd devices/
+			pi@raspberrypi /sys/bus/w1/devices $ ls
+			10-0008032a0b1e  w1_bus_master1
+			pi@raspberrypi /sys/bus/w1/devices $
+			
+			Zeigt, dass der Temperatur-Sensor 10-0008032a0b1e (Family code 10- für DS18S20) erkannt wurde 
+			
+			===> HEUREKA - works !!!
+			
+			Beispiel für eine Temperatur-Messung:
+			
+			pi@raspberrypi ~ $ cat /sys/bus/w1/devices/10-0008032a0b1e/w1_slave 
+			38 00 4b 46 ff ff 0b 10 a9 : crc=a9 YES
+			38 00 4b 46 ff ff 0b 10 a9 t=28062
+			pi@raspberrypi ~ $ cat /sys/bus/w1/devices/10-0008032a0b1e/w1_slave 
+			26 00 4b 46 ff ff 0d 10 ee : crc=ee YES
+			26 00 4b 46 ff ff 0d 10 ee t=18937
+			
+			Folgendes in /etc/modules mit aufgenommen, damit 1-wire Treiber auch beim Boot geladen werden
+			
+			# /etc/modules
+			w1-gpio pullup=1
+			w1-therm
+			
+			Basierend auf https://www.modmypi.com/blog/ds18b20-one-wire-digital-temperature-sensor-and-the-raspberry-pi
+			folgendes Python-Programm geschrieben:
+			
+			fptemp.py
+			
+			==> Created version V02.00.00		
 
 			
 ++++++++++++++++++++++++++++++++++++++++
@@ -455,9 +522,38 @@ ssh pi@raspberrypi
 
 pi@raspberrypi's password: pi.....e
 
-‚+++++++++++++++++++++
++++++++++++++++++++++
 
 SHUTDONW:
 
 sudo shutdown -h now
+
++++++++++++++++++++++
+
+Various on flowerpi service:
+
+check how long program did run:
+
+pi@raspberrypi ~/flowerpi $ ps ax | grep flowerpi
+ 2230 ?        S      0:00 supervise flowerpi
+ 2233 ?        S      0:00 sudo python /home/pi/flowerpi/flowerpi-main.py
+ 2235 ?        S      0:02 python /home/pi/flowerpi/flowerpi-main.py
+ 2535 pts/0    S+     0:00 grep --color=auto flowerpi
+
+other way to check if program / service is running my means of using SVSTAT:
+
+pi@raspberrypi ~/flowerpi $ sudo svstat /etc/service/flowerpi
+/etc/service/flowerpi: up (pid 2231) 978 seconds
+
+STOPPING the service:
+
+pi@raspberrypi ~ $ sudo svc -d /etc/service/flowerpi
+
+pi@raspberrypi ~ $ sudo svstat /etc/service/flowerpi
+/etc/service/flowerpi: down 113 seconds, normally up
+
+
+STARTING the service:
+
+pi@raspberrypi ~ $ sudo svc -u /etc/service/flowerpi
 
