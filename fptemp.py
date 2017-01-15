@@ -133,6 +133,8 @@ def pushtemp(tempc,tempf):
 		abortonerror()
 
 	templog("==> out pushtemp")
+	
+	return
 
 # ################
 # MAIN APPLICATION
