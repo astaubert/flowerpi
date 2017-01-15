@@ -130,7 +130,6 @@ def pushtemp(tempc,tempf):
 		templog("Sorry, was not able to create a new temperature")
 		templog('Response code is: ' + str(r.status_code))
 		templog('Response text is: ' + str(r.text))
-		abortonerror()
 
 	templog("==> out pushtemp")
 	
