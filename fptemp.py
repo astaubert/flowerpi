@@ -119,7 +119,7 @@ def poquerysite():
 
 # Finally, we loop our process and tell it to output our temperature data every 1 second.
 
-popquerysite
+poquerysite
 
 while True:
         print(read_temp())
