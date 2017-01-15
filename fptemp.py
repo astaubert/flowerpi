@@ -152,7 +152,7 @@ templog("PHASE1: Main Program Loop")
 while True:
         # print(read_temp())
 		tempc,tempf = read_temp()
-		print "Celsius: " + tempc
-		print "Farenheit: " + tempf
+		templog("Celsius: " + str(tempc))
+		templof("Farenheit: " + str(tempf))
 		pushtemp(tempc.tempf)
         time.sleep(3)
