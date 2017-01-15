@@ -90,12 +90,12 @@ def getserial():
 #
 def poquerysite():
 
-		templog("=> in poquerysite",logtype) 
+		templog("=> in poquerysite") 
 
 		error = True
 		while error:
 			try:
-				templog('Try to query site: ' + str(USEURL),logtype)
+				templog('Try to query site: ' + str(USEURL))
 				r = requests.get(USEURL)
 				error = False
 			except:
@@ -103,13 +103,13 @@ def poquerysite():
 				blinkredled()
 				error = True
 
-		templog('Got response from URL: ' + str(r),logtype) 
+		templog('Got response from URL: ' + str(r)) 
 
 		tagstatus = "False"
 		if r.status_code == 200:
 			tagstatus = "True"
 
-		templog("<= out fppost, return value: tagstatus = " + str(tagstatus),logtype)
+		templog("<= out fppost, return value: tagstatus = " + str(tagstatus))
 
 		return tagstatus
 
