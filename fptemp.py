@@ -3,6 +3,15 @@
 
 import os
 import time
+import datetime
+
+# Import other libraries required to store the temperature value on Heroku:
+
+import requests
+import json
+
+# URL of web application
+USEURL = 'https://gentle-taiga-6367.herokuapp.com'
 
 # We then need to load our drivers. Comment Staubert - not required since already loaded on boot time via /etc/modules
 
@@ -14,7 +23,7 @@ import time
 temp_sensor = '/sys/bus/w1/devices/10-0008032a0b1e/w1_slave'
 
 # We then need to define a variable for our raw temperature value (temp_raw)
-
+#
 def temp_raw():
 
     f = open(temp_sensor, 'r')
@@ -23,7 +32,7 @@ def temp_raw():
     return lines
 
 # Now we read and parse the temperature
-
+#
 def read_temp():
 
     lines = temp_raw()
@@ -40,7 +49,77 @@ def read_temp():
         temp_f = temp_c * 9.0 / 5.0 + 32.0
         return temp_c, temp_f
 
+# Function to create standardaized log entries
+#
+def templog(value):
+
+	#added to normalize unicode values to ascii values, not to get problems with printout on console
+	#based on: http://stackoverflow.com/questions/1207457/convert-a-unicode-string-to-a-string-in-python-containing-extra-symbols
+	value.encode('ascii','ignore')
+
+	stamp = str(datetime.datetime.now()).split('.')[0]
+	logstring = "templog " + stamp + ": " + str(value)
+
+	print logstring
+
+	myfile = open("fptemp.log", "a")
+	myfile.write(logstring)
+	myfile.write("\n")
+	myfile.close()
+
+
+# Read Serial Number of Raspberry Pi - identifies watering can
+#
+def getserial():
+
+	# Extract serial from cpuinfo file
+	cpuserial = "0000000000000000"
+
+	try:
+		f = open('/proc/cpuinfo','r')
+		for line in f:
+			if line[0:6]=='Serial':
+		       cpuserial = line[10:26]
+			   f.close()
+			except:
+				cpuserial = "ERROR000000000"
+
+	return cpuserial
+
+# Function to query if web-site is active
+#
+def poquerysite():
+
+		templog("=> in poquerysite",logtype) 
+
+		error = True
+		while error:
+			try:
+				templog('Try to query site: ' + str(USEURL),logtype)
+				r = requests.get(USEURL)
+				error = False
+			except:
+				templog('Error: Site not accessible')
+				blinkredled()
+				error = True
+
+		templog('Got response from URL: ' + str(r),logtype) 
+
+		tagstatus = "False"
+		if r.status_code == 200:
+			tagstatus = "True"
+
+		templog("<= out fppost, return value: tagstatus = " + str(tagstatus),logtype)
+
+		return tagstatus
+
+
+# ################
+# MAIN APPLICATION
+
 # Finally, we loop our process and tell it to output our temperature data every 1 second.
+
+popquerysite
 
 while True:
         print(read_temp())

@@ -457,7 +457,16 @@ pi@raspberrypi ~/flowerpi $
 			
 			fptemp.py
 			
-			==> Created version V02.00.00		
+			==> Created version V02.00.03
+			
+			HEUREKA - tut, siehe Output (jeweils Celsius und Fahrenheit):
+			
+			(30.687, 87.2366)
+			(30.125, 86.225)
+			(29.625, 85.325)
+			(29.125, 84.425)
+			(28.75, 83.75)
+			(28.312, 82.9616)		
 
 			
 ++++++++++++++++++++++++++++++++++++++++
