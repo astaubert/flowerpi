@@ -155,5 +155,5 @@ while True:
 		tempc,tempf = read_temp()
 		templog("Celsius: " + str(tempc))
 		templog("Farenheit: " + str(tempf))
-		pushtemp(tempc.tempf)
+		pushtemp(tempc,tempf)
 		time.sleep(3)
