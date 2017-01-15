@@ -143,7 +143,7 @@ def poquerytag(tagsn, logtype="prod"):
 	if r.status_code == 200:
 		tagstatus = "existing"
 
-	fplog.l("<= out fppost, return value: tagstatus = " + str(tagstatus),logtype)
+	fplog.l("<= out poquerysite, return value: tagstatus = " + str(tagstatus),logtype)
 
 	return tagstatus
 

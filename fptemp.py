@@ -105,13 +105,33 @@ def poquerysite():
 
 		templog('Got response from URL: ' + str(r)) 
 
-		tagstatus = "False"
+		sitestatus = "False"
 		if r.status_code == 200:
-			tagstatus = "True"
+			sitestatus = "True"
 
-		templog("<= out fppost, return value: tagstatus = " + str(tagstatus))
+		templog("<= out poquerysite, return value: sitestatus = " + str(sitestatus))
 
-		return tagstatus
+		return sitestatus
+		
+# Function to upload temperature reading to web-site
+#
+def pushtemp(tempc,tempf):
+	
+	templog("==> in pushtemp")
+	
+	payload = {'pisn': PISERIAL, 'location': '-test-', 'tempc': tempc, 'tempf': tempf}
+	
+	r = requests.post(USEURL + '/temperatures.json', json=payload)
+
+	if r.status_code == 201:
+		templog("... success in creating new temperature")
+		flower_hash = json.loads(r.text)
+		
+	else:
+		templog("Sorry, was not able to create a new temperature")
+		templog('Response code is: ' + str(r.status_code))
+		templog('Response text is: ' + str(r.text))
+		abortonerror()
 
 
 # ################
@@ -121,10 +141,18 @@ def poquerysite():
 
 templog("PHASE0: Main Program Start")
 
+templog("Try to connect to web-site")
 poquerysite()
+
+templog("Try to get PI serial number")
+PISERIAL = getserial()
+
 
 templog("PHASE1: Main Program Loop")
 
 while True:
-        print(read_temp())
-        time.sleep(1)
+        # print(read_temp())
+		tempc , tempf = read_temp()
+		print "Celsius: " + tempc + " Farenheit: " + tempf
+		pushtemp(tempc.tempf)
+        time.sleep(3)
