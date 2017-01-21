@@ -505,7 +505,11 @@ pi@raspberrypi ~/flowerpi $
 			Decision: use 'tempf' field in order to store time - in minutes - when the next measurement will be done !
 			(no longer temperature in Farenheit!)
 			
-			==> Created version V02.02.00			
+			==> Created version V02.02.04
+			
+			WORKS Great ==>>> Location will be queried from flowerpiheroku!!
+			
+			 			
 					
 ++++++++++++++++++++++++++++++++++++++++
 
