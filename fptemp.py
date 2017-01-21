@@ -151,8 +151,7 @@ def gettemploc(pisn):
 	location.encode('ascii','ignore')		
 	templog('The read location is: '+ location)
 
-	timedelta = str(location_hash["timedelta"])
-	timedelta.encode('int','ignore')		
+	timedelta = int(str(location_hash["timedelta"]))	
 	templog('The timedelta is: '+ timedelta)
 
 	templog("==> out gettemploc")	
