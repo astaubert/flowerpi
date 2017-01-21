@@ -149,11 +149,15 @@ def gettemploc(pisn):
 
 	location = str(location_hash["location"])
 	location.encode('ascii','ignore')		
-	templog('The ID of the read location for : ' + str(pisn) + ' is: '+ location)
+	templog('The read location is: '+ location)
+
+	timedelta = str(location_hash["timedelta"])
+	timedelta.encode('int','ignore')		
+	templog('The timedelta is: '+ timedelta)
 
 	templog("==> out gettemploc")	
 	
-	return location
+	return location,timedelta
 
 
 # ################
@@ -181,11 +185,13 @@ while True:
 		tempc = read_temp()	# Read temperature
 		
 		templog("Temperature [Celsius]: " + str(tempc))
-		templog("Time to next reading [min]: " + str(deltatime))
 		templog("Status of heater: " + statusheater)
 		
-		location = gettemploc(PISERIAL)
-		templog("Location of can: " + location)
+		location,deltatime = gettemploc(PISERIAL)  # Read location and time to next reading from Internet (flowepiheroku)
 		
-		pushtemp(tempc,deltatime,statusheater,location)
-		time.sleep(deltatime*60)
+		templog("Location of can: " + location)
+		templog("Time to next reading [min]: " + str(deltatime))
+		
+		pushtemp(tempc,deltatime,statusheater,location) # Write temperature to Internet (flowepiheroku)
+		
+		time.sleep(deltatime*60)  # Wait until next measurement

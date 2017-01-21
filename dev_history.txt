@@ -509,7 +509,9 @@ pi@raspberrypi ~/flowerpi $
 			
 			WORKS Great ==>>> Location will be queried from flowerpiheroku!!
 			
-			 			
+			Added reading 'timedelta' from flowerpiheroku
+			
+			==> Created version V02.03.00					
 					
 ++++++++++++++++++++++++++++++++++++++++
 
