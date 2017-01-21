@@ -149,7 +149,7 @@ def gettemploc(pisn):
 
 	location = str(location_hash["location"])
 	location.encode('ascii','ignore')		
-	fplog.l('The ID of the read location for : ' + str(pisn) + ' is: '+ location)
+	templog('The ID of the read location for : ' + str(pisn) + ' is: '+ location)
 
 	templog("==> out gettemploc")	
 	
@@ -186,7 +186,6 @@ while True:
 		
 		location = gettemploc(PISERIAL)
 		templog("Location of can: " + location)
-		
 		
 		pushtemp(tempc,deltatime,statusheater,location)
 		time.sleep(deltatime*60)
