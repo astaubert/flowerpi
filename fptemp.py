@@ -135,6 +135,26 @@ def pushtemp(tempc,time,heater,location):
 	templog("==> out pushtemp")
 	
 	return
+	
+# Function get location of can from internet via 'temploc'
+#
+def gettemploc(pisn):
+	
+	templog("==> in gettemploc")
+	
+	r = requests.get(USEURL + '/locquery/' + str(pisn))
+	templog(r.text)
+			
+	location_hash = json.loads(r.text)
+
+	location = str(location_hash["location"])
+	location.encode('ascii','ignore')		
+	fplog.l('The ID of the read location for : ' + str(pisn) + ' is: '+ location)
+
+	templog("==> out gettemploc")	
+	
+	return location
+
 
 # ################
 # MAIN APPLICATION
@@ -159,9 +179,14 @@ templog("PHASE1: Main Program Loop")
 
 while True:
 		tempc = read_temp()	# Read temperature
+		
 		templog("Temperature [Celsius]: " + str(tempc))
 		templog("Time to next reading [min]: " + str(deltatime))
 		templog("Status of heater: " + statusheater)
+		
+		location = gettemploc(PISERIAL)
 		templog("Location of can: " + location)
+		
+		
 		pushtemp(tempc,deltatime,statusheater,location)
 		time.sleep(deltatime*60)
