@@ -29,6 +29,7 @@ def temp_raw():
     f = open(temp_sensor, 'r')
     lines = f.readlines()
     f.close()
+
     return lines
 
 # Now we read and parse the temperature
@@ -40,14 +41,14 @@ def read_temp():
         time.sleep(0.2)
         lines = temp_raw()
 
-    # Once the program is happy that the YES signal has been received, we proceed to our second line of output
+    # Once the YES signal has been received, we proceed to our second line of output
     temp_output = lines[1].find('t=')
 
     if temp_output != -1:
         temp_string = lines[1].strip()[temp_output+2:]
         temp_c = float(temp_string) / 1000.0
-        # temp_f = temp_c * 9.0 / 5.0 + 32.0
-        return temp_c
+        
+	return temp_c
 
 # Function to create standardaized log entries
 #
