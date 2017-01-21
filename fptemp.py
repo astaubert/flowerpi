@@ -46,8 +46,8 @@ def read_temp():
     if temp_output != -1:
         temp_string = lines[1].strip()[temp_output+2:]
         temp_c = float(temp_string) / 1000.0
-        temp_f = temp_c * 9.0 / 5.0 + 32.0
-        return temp_c, temp_f
+        # temp_f = temp_c * 9.0 / 5.0 + 32.0
+        return temp_c
 
 # Function to create standardaized log entries
 #
@@ -114,20 +114,20 @@ def poquerysite():
 		
 # Function to upload temperature reading to web-site
 #
-def pushtemp(tempc,tempf):
+def pushtemp(tempc,time,heater):
 	
 	templog("==> in pushtemp")
 	
-	payload = {'pisn': PISERIAL, 'location': '-test-', 'tempc' : tempc, 'tempf': tempf}
+	payload = {'pisn': PISERIAL, 'location': '-test-', 'tempc' : tempc, 'tempf': time, 'statusheater': heater}
 	
 	r = requests.post(USEURL + '/temperatures.json', json=payload)
 
 	if r.status_code == 201:
-		templog("... success in creating new temperature")
+		templog("... success in creating new temperature record")
 		flower_hash = json.loads(r.text)
 		
 	else:
-		templog("Sorry, was not able to create a new temperature")
+		templog("Sorry, was not able to create a new temperature record")
 		templog('Response code is: ' + str(r.status_code))
 		templog('Response text is: ' + str(r.text))
 
@@ -138,21 +138,28 @@ def pushtemp(tempc,tempf):
 # ################
 # MAIN APPLICATION
 
-# Finally, we loop our process and tell it to output our temperature data every 1 second.
+# Initialize
 
 templog("PHASE0: Main Program Start")
 
-templog("Try to connect to web-site")
+deltatime = 30  # Initial time until a next reading will happen
+statusheater = 'off'  # Initial status of external heater
+location = '-dummy-'  # Initial status of where the can is located
+
+templog("Try to get PI serial number")  # Get serial number of PI who takes the temperature reading
+PISERIAL = getserial()
+
+templog("Try to connect to web-site")  # See if internet connection works
 poquerysite()
 
-templog("Try to get PI serial number")
-PISERIAL = getserial()
+# Loop
 
 templog("PHASE1: Main Program Loop")
 
 while True:
-		tempc,tempf = read_temp()
-		templog("Celsius: " + str(tempc))
-		templog("Farenheit: " + str(tempf))
-		pushtemp(tempc,tempf)
-		time.sleep(30*60)
+		tempc = read_temp()	# Read temperature
+		templog("Temperature [Celsius]: " + str(tempc))
+		templog("Time to next reading [min]: " + str(deltatime))
+		templog("Status of heater: " + statusheater)
+		pushtemp(tempc,deltatime,statusheater)
+		time.sleep(deltatime*60)

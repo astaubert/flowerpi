@@ -473,7 +473,40 @@ pi@raspberrypi ~/flowerpi $
 			==>> Heureka, TUT! Upload from temperatures from can to Internet works :-))
 
 			==> Created version V02.01.03
-						
+			
+21.01.17	Created service for fptemp.py to start automatically (see also activities from 30.12.15)
+
+			pi@raspberrypi ~/flowerpi $ sudo mkdir -p /service/flowerpitemp
+			pi@raspberrypi ~/flowerpi $ cd /service/flowerpitemp
+
+			pi@raspberrypi /service/flowerpitemp $ sudo nano run
+			
+		    Contents of 'run':
+			#!/bin/sh
+			sudo rm -rf /service/flowerpitemp/fptemp.log
+			sudo python /home/pi/flowerpi/fptemp.py
+			
+			# make it executable
+			sudo chmod 755 /service/flowerpitemp/run
+
+			pi@raspberrypi /etc/service $ sudo ln -s /service/flowerpitemp .
+			pi@raspberrypi /etc/service $ ls -la
+			total 8
+			drwxr-xr-x   2 root root 4096 Jan 21 16:46 .
+			drwxr-xr-x 103 root root 4096 Jan 21 16:46 ..
+			lrwxrwxrwx   1 root root   17 Dec 30  2015 flowerpi -> /service/flowerpi
+			lrwxrwxrwx   1 root root   21 Jan 21 16:46 flowerpitemp -> /service/flowerpitemp
+			pi@raspberrypi /etc/service $
+			
+			Cool ===>>> WORKS! Python program starts automatically on boot, or re-starts upon crash ;-))	
+			
+			CONTINUE to work on program logic.
+			
+			Decision: use 'tempf' field in order to store time - in minutes - when the next measurement will be done !
+			(no longer temperature in Farenheit!)
+			
+			==> Created version V02.02.00			
+					
 ++++++++++++++++++++++++++++++++++++++++
 
 External libraries that need to be installed:
@@ -570,4 +603,5 @@ pi@raspberrypi ~ $ sudo svstat /etc/service/flowerpi
 STARTING the service:
 
 pi@raspberrypi ~ $ sudo svc -u /etc/service/flowerpi
+
 
