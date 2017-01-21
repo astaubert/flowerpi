@@ -511,7 +511,9 @@ pi@raspberrypi ~/flowerpi $
 			
 			Added reading 'timedelta' from flowerpiheroku
 			
-			==> Created version V02.03.00					
+			==> Created version V02.03.03
+			
+			WORKS Great !!!!					
 					
 ++++++++++++++++++++++++++++++++++++++++
 
