@@ -596,10 +596,6 @@ STOPPING the service:
 
 pi@raspberrypi ~ $ sudo svc -d /etc/service/flowerpi
 
-pi@raspberrypi ~ $ sudo svstat /etc/service/flowerpi
-/etc/service/flowerpi: down 113 seconds, normally up
-
-
 STARTING the service:
 
 pi@raspberrypi ~ $ sudo svc -u /etc/service/flowerpi

@@ -114,11 +114,11 @@ def poquerysite():
 		
 # Function to upload temperature reading to web-site
 #
-def pushtemp(tempc,time,heater):
+def pushtemp(tempc,time,heater,location):
 	
 	templog("==> in pushtemp")
 	
-	payload = {'pisn': PISERIAL, 'location': '-test-', 'tempc' : tempc, 'tempf': time, 'statusheater': heater}
+	payload = {'pisn': PISERIAL, 'location': location, 'tempc' : tempc, 'tempf': time, 'statusheater': heater}
 	
 	r = requests.post(USEURL + '/temperatures.json', json=payload)
 
@@ -161,5 +161,6 @@ while True:
 		templog("Temperature [Celsius]: " + str(tempc))
 		templog("Time to next reading [min]: " + str(deltatime))
 		templog("Status of heater: " + statusheater)
-		pushtemp(tempc,deltatime,statusheater)
+		templog("Location of can: " + location)
+		pushtemp(tempc,deltatime,statusheater,location)
 		time.sleep(deltatime*60)
